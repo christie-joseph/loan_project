@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>loan4u</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">
+    <style>
+      h1{text-align:right;;}
+    </style>
+  </head>
+  <body>
+    <div class ="container">
+      <div class="jumbotron">
+        <h1>
+          {% if user.is_authenticated %}
+            <br><h1>Welcome {{ user.username }}
+            <a href="{% url 'logout' %}"><font size="3" color="black">Logout</a>
+        </h1>
+      </div>
+    </div>
+            <form  method="POST">
+              {% csrf_token %}
+              <select name="loanlist">
+                {% for element in loanlist %}
+                  <option value={{ element }}>{{ element }}</option>
+                {% endfor %}
+              </select>
+              <input type="number" name="loanamtinput" placeholder="Enter the Loan : ">
+              <input type="number" name="loaninstallment" value="Enter your monthly installments : ">
+              <button type="submit" >Search</button>
+            </form>
+          {% else %}
+            <li><a href="{% url 'loan_app:user_login' %}">Click here to Login</a></li>
+          {% endif %}
+    </h1>
+  </body>
+</html>
